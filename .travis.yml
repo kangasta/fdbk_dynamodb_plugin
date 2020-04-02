@@ -8,8 +8,8 @@ services:
 install:
 - pip install -r requirements.txt
 script:
-- pycodestyle fdbk
-- pylint -E --enable=invalid-name,unused-import,useless-object-inheritance fdbk
+- pycodestyle fdbk_dynamodb_plugin
+- pylint -E --enable=invalid-name,unused-import,useless-object-inheritance fdbk_dynamodb_plugin
 - docker run -dp 8000:8000 --name=dynamo amazon/dynamodb-local
 - coverage run --branch --source fdbk/ -m unittest discover -s tst/
 - coverage report -m
