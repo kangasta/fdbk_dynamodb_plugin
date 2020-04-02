@@ -1,36 +1,24 @@
-# fdbk
+# fdbk_dynamodb_plugin
 
-[![Build Status](https://travis-ci.org/kangasta/fdbk.svg?branch=master)](https://travis-ci.org/kangasta/fdbk)
+[![Build Status](https://travis-ci.org/kangasta/fdbk_dynamodb_plugin.svg?branch=master)](https://travis-ci.org/kangasta/fdbk_dynamodb_plugin)
 
-Backend and DB wrapper for feedback collection system.
+AWS Dynamo DB wrapper for fdbk.
 
 ## Installation
 
 Run:
 
 ```bash
-pip install fdbk
+pip install fdbk_dynamodb_plugin
 ```
 
-to install from [PyPI](https://pypi.org/project/fdbk/) or download this repository and run
+to install from [PyPI](https://pypi.org/project/fdbk_dynamodb_plugin/) or download this repository and run
 
 ```bash
 python setup.py install
 ```
 
 to install from sources.
-
-## Usage
-
-### Running the server
-
-Launch development server to port 8080 with:
-
-```bash
-fdbk-server -p 8080
-```
-
-See `fdbk-server --help` for other options. The server is configured via a configuration file: see example in examples directory.
 
 ## Testing
 
