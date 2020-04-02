@@ -47,8 +47,12 @@ class DynamoDbConnection(DBConnection):
         self._data_table.put_item(Item=data, ConditionExpression=Attr(
             'topic_id').not_exists() | Attr('timestamp').not_exists(), )
 
-    def get_topics(self):
-        topics = self._topics_table.scan().get('Items')
+    def get_topics(self, type_=None):
+        if type_:
+            topics = self._topics_table.scan(
+                FilterExpression=Attr("type").eq(type_)).get('Items')
+        else:
+            topics = self._topics_table.scan().get('Items')
         return generate_topics_list(topics)
 
     def get_topic(self, topic_id):
@@ -66,10 +70,14 @@ class DynamoDbConnection(DBConnection):
 
         key = Key('topic_id').eq(topic_id)
 
-        if since:
-            key &= Key('timestamp').gte(timestamp_as_str(since))
-        if until:
-            key &= Key('timestamp').lte(timestamp_as_str(until))
+        if since and until:
+            key &= Key('timestamp').between(
+                timestamp_as_str(since), timestamp_as_str(until))
+        else:
+            if since:
+                key &= Key('timestamp').gte(timestamp_as_str(since))
+            if until:
+                key &= Key('timestamp').lte(timestamp_as_str(until))
 
         data = list(obj_decimals_to_numbers(i) for i in self._data_table.query(
             Limit=limit,
