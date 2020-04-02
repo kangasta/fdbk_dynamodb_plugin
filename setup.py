@@ -3,7 +3,7 @@
 import re
 import setuptools
 
-with open("fdbk/_version.py", "r") as f:
+with open("fdbk_dynamodb_plugin/_version.py", "r") as f:
     try:
         version = re.search(
             r"__version__\s*=\s*[\"']([^\"']+)[\"']",f.read()).group(1)
