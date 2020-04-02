@@ -5,7 +5,6 @@ python:
 - '3.8'
 services:
 - docker
-
 install:
 - pip install -r requirements.txt
 script:
@@ -15,12 +14,11 @@ script:
 - coverage run --branch --source fdbk/ -m unittest discover -s tst/
 - coverage report -m
 - docker rm -f dynamo
-
 deploy:
   provider: pypi
   user: __token__
   password:
-    secure: AYtFiggyOquEbtuui8aXTXgIXoxpBpek2J9+FH09l1rUDdNZYx0S42dGW/2OfbzL8qA0du/65Nb5iPvP+W+nXfJ6Q2zSloxUZppj6yNl/6kcylHHONZZR3FrcVk3OIqOMH1dw1H6qy27kKFbPh0bHP3zTrANy+VrheLr7dIycuIMZJ+hP92pj22Ume6L9C6N9oO/NiLhe0XQQq2ppbJBeCNxEKW/E4SwUHqtnAEBl4uui48zx+lUiW1GJG8ZDRdHX0qbIVDNaYTvhEXM4ijIjTyW3V6ihmJy+OlTrxLZLEyy8GZiZo1Clt/WbZ8AlndzO1k31KdAM/AfGGhzbM4xNA3fbendJ+2Zycxvez28wESQ4BG0TZ3JF7vtroQ6PhmnF43hN7aqNtfCT9duQQKQ0FheuUgvvRvEzOKCbjCvi1KL2OWLshnZCLfVyOtsGoz55qEPBZCh8Hus5/Kl/otoiyvhHmGBGwDG/adaeLNmfJunfCdcImrwnS0oNxb8maEnsCJZ6CXd880ZOVtF6V0uKdk2l5BI02F1iCMHWKyaqEVO5HSMIg9e97u4XeA7ge24oq3lyd7dGCGA+rZmUXYPsbqWn0YvelQzZtIE8npwHqlptuYO+UNUpurUuirYirNEMOGiRg3FEk4pFAzfn03Q82yIpLdKN9pnV/k7YSpGeq0=
+    secure: 02z+5RbK+PO73hHg6YTXj1HmGOCuXOQoLVlFCRemf9KxN0R9FwHfWm2LYM3EJCnnYkr0YDVzc5oUbI9UhulhTNRIZie0X3Jp23T/PR8g0JCG+nRhi+UEkir5f3h7HKTHh1AGYQpjH0V1nbxAMNi64++QGbiBRns/m6uAyAuiITOqW54uAs5yWhwD3qxLmL+uibze2LynWSXWGkjMP6mVMSZZbtj2lMXX8PuWTX7j6I/O8sNsEew/TaapEuG+tSYgTajOLBkv1FWh3gXVfUt4x+aFbzFAG2APgYnlIL0J6J17G/0mwBJcbSSer1GZU/8R1Gtf4/4RL1cC/FPSheAc39yq+ZEyCo3mDeXBubVYeHQtmqT0c4+JGhMJK9Rh/4U6txMh7ylPGpacbQ41vdw+M3u5qECKkc1PVm2FJYnhlsXYgE7umH7RHYcCRBe2tqR1gNuZJe5kJdVrKNALhTvpwjzbTA8E3JMAAJ3enkjkkewECh1kvS15+84YewD+LI24bgzrZEgioCIcPZ2oQ+ab0iYSRsHKjJ1bHObJuhRb7PmlMADkyM2UV1ND6OYvBViRJdPeqYWfUy14VPmi1ZjyHgIfz1HBtu11BUXdE/U+G7gHf1JesIoCMWHc6ExhMDI7yByhDXMhGb8l8YVyAqiw/s7ZiDOeEovRxMhaPYP4+2A=
   on:
     tags: true
     python: 3.7
