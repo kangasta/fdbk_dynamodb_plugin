@@ -20,10 +20,10 @@ class DynamoDbConnection(DBConnection):
             data_table_name="fdbk_data",
             *args, **kwargs):
         self._dynamodb = boto3.resource('dynamodb', *args, **kwargs)
-        self._topics_table = self._dynamodb.Table(
-            topics_table_name)  # pylint: disable=no-member
-        self._data_table = self._dynamodb.Table(
-            data_table_name)  # pylint: disable=no-member
+        self._topics_table = self._dynamodb.Table(  # pylint: disable=no-member
+            topics_table_name)
+        self._data_table = self._dynamodb.Table(  # pylint: disable=no-member
+            data_table_name)
 
         # Ensure tables exist
         self._topics_table.table_status

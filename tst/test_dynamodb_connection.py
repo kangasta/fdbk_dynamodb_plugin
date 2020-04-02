@@ -10,21 +10,24 @@ from fdbk_dynamodb_plugin import ConnectionClass
 from fdbk_dynamodb_plugin.utils import *
 
 
-ENDPOINT_URL = 'http://localhost:8000'
-
+AWS_KWARGS = dict(
+    endpoint_url='http://localhost:8000',
+    region_name='eu-central-1',
+    aws_access_key_id='ACCESS_KEY',
+    aws_secret_access_key='SECRET_KEY')
 
 def _create_tables():
     try:
-        create_topics_table(endpoint_url=ENDPOINT_URL)
-        create_data_table(endpoint_url=ENDPOINT_URL)
+        create_topics_table(**AWS_KWARGS)
+        create_data_table(**AWS_KWARGS)
     except ResourceWarning:
         pass
 
 
 def _delete_tables():
     try:
-        delete_topics_table(endpoint_url=ENDPOINT_URL)
-        delete_data_table(endpoint_url=ENDPOINT_URL)
+        delete_topics_table(**AWS_KWARGS)
+        delete_data_table(**AWS_KWARGS)
     except ResourceWarning:
         pass
 
@@ -39,7 +42,7 @@ class DictConnectionCommonTest(CommonTest, TestCase):
             _delete_tables()
             _create_tables()
 
-        self.C = ConnectionClass(endpoint_url=ENDPOINT_URL)
+        self.C = ConnectionClass(**AWS_KWARGS)
 
     def tearDown(self):
         _delete_tables()
