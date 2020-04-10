@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: "2010-09-09"
-Description: Template for creating the DynamoDB tables for fdbk DynamoDB plugin
+Description: Template for creating the DynamoDB tables, roles, and reporter user for fdbk DynamoDB plugin
 Parameters:
   TopicsTableName:
     Type: String
@@ -9,6 +9,10 @@ Parameters:
     Type: String
     Default: fdbk_data
     Description: TableName for the data table
+  ReporterUserName:
+    Type: String
+    Default: fdbk_reporter
+    Description: UserName for the reporter user
 Resources:
   TopicsTable:
     Type: AWS::DynamoDB::Table
@@ -38,3 +42,30 @@ Resources:
       - AttributeName: timestamp
         KeyType: RANGE
       BillingMode: PAY_PER_REQUEST
+  ReporterUser:
+    Type: AWS::IAM::User
+    Properties:
+      UserName:
+        Ref: ReporterUserName
+      Policies:
+      - PolicyName: FdbkTopicsGet
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            Effect: Allow
+            Action:
+            - dynamodb:DescribeTable
+            - dynamodb:GetItem
+            - dynamodb:Scan
+            Resource:
+            - !GetAtt TopicsTable.Arn
+      - PolicyName: FdbkDataPut
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            Effect: Allow
+            Action:
+            - dynamodb:DescribeTable
+            - dynamodb:PutItem
+            Resource:
+            - !GetAtt DataTable.Arn
