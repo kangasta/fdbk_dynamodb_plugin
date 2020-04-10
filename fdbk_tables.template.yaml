@@ -1,0 +1,40 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Template for creating the DynamoDB tables for fdbk DynamoDB plugin
+Parameters:
+  TopicsTableName:
+    Type: String
+    Default: fdbk_topics
+    Description: TableName for the topics table
+  DataTableName:
+    Type: String
+    Default: fdbk_data
+    Description: TableName for the data table
+Resources:
+  TopicsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName:
+        Ref: TopicsTableName
+      AttributeDefinitions:
+      - AttributeName: id
+        AttributeType: S
+      KeySchema:
+      - AttributeName: id
+        KeyType: HASH
+      BillingMode: PAY_PER_REQUEST
+  DataTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName:
+        Ref: DataTableName
+      AttributeDefinitions:
+      - AttributeName: topic_id
+        AttributeType: S
+      - AttributeName: timestamp
+        AttributeType: S
+      KeySchema:
+      - AttributeName: topic_id
+        KeyType: HASH
+      - AttributeName: timestamp
+        KeyType: RANGE
+      BillingMode: PAY_PER_REQUEST
