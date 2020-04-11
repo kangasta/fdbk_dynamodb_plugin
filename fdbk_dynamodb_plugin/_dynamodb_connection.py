@@ -10,7 +10,7 @@ from fdbk.utils import (
     timestamp_as_str)
 from fdbk.utils.messages import *
 
-from .utils import obj_decimals_to_numbers
+from .utils import obj_decimals_to_numbers, obj_numbers_to_decimals
 
 
 class DynamoDbConnection(DBConnection):
@@ -41,6 +41,7 @@ class DynamoDbConnection(DBConnection):
     def add_data(self, topic_id, values):
         topic_d = self.get_topic(topic_id)
         fields = topic_d["fields"]
+        values = obj_numbers_to_decimals(values)
 
         data = generate_data_entry(
             topic_id, fields, values, convert_timestamps=True)

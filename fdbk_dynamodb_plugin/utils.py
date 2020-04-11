@@ -1,4 +1,5 @@
 from decimal import Decimal
+from numbers import Number
 
 import boto3
 
@@ -76,5 +77,13 @@ def obj_decimals_to_numbers(obj):
                 obj[key] = float(value)
             else:
                 obj[key] = int(value)
+
+    return obj
+
+
+def obj_numbers_to_decimals(obj):
+    for key, value in obj.items():
+        if isinstance(value, Number):
+            obj[key] = Decimal(value)
 
     return obj

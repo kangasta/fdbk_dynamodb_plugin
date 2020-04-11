@@ -23,7 +23,7 @@ setuptools.setup(
     url="https://github.com/kangasta/fdbk_dynamodb_plugin",
     packages=setuptools.find_packages(),
     install_requires=[
-        "fdbk==2.0a2",
+        "fdbk==2.0a3",
         "boto3>=1.12.33"
     ],
     python_requires='>=3.6',
