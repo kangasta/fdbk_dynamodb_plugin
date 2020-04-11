@@ -84,6 +84,6 @@ def obj_decimals_to_numbers(obj):
 def obj_numbers_to_decimals(obj):
     for key, value in obj.items():
         if isinstance(value, Number):
-            obj[key] = Decimal(value)
+            obj[key] = Decimal(str(value))
 
     return obj
