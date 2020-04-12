@@ -65,7 +65,10 @@ class DynamoDbConnection(DBConnection):
 
         return generate_topic_response(topic)
 
-    def get_data(self, topic_id, since=None, until=None, limit=300):
+    def get_data(self, topic_id, since=None, until=None, limit=None):
+        if not limit:
+            limit = 500
+
         # Check that topic exists
         self.get_topic(topic_id)
 
