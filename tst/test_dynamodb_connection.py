@@ -32,7 +32,7 @@ def _delete_tables():
         pass
 
 
-class DictConnectionCommonTest(CommonTest, TestCase):
+class DynamoDbConnectionCommonTest(CommonTest, TestCase):
     def setUp(self):
         warnings.simplefilter("ignore", ResourceWarning)
 

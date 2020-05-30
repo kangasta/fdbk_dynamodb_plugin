@@ -5,7 +5,7 @@ from unittest import TestCase
 from fdbk_dynamodb_plugin.utils import obj_decimals_to_numbers
 
 
-class DictConnectionCommonTest(TestCase):
+class UtilsTest(TestCase):
     def test_obj_decimals_to_numbers(self):
         before = dict(f=Decimal(1.5), i=Decimal(3))
         after = obj_decimals_to_numbers(before)
