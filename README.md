@@ -47,3 +47,15 @@ Get test coverage with commands:
 coverage run --branch --source fdbk_dynamodb_plugin/ -m unittest discover -s tst/
 coverage report -m
 ```
+
+## Cloud deployment
+
+In addition to the plugin, this repository includes CloudFormation template for setting up the DynamoDB tables as well as the related IAM resources and a Chalice app that implements a simple serverless backend to view overview of the data.
+
+The CloudFormation template is available in [fdbk_tables.template.yaml](./fdbk_tables.template.yaml). It setups both of the tables, topics and data, with pay-per-request billing mode.
+
+The chalice implementation for serverless backend is located in [serverless-backend/](./serverless-backend/). The application configuration in [serverless-backend\.chalice\config.json](./serverless-backend\.chalice\config.json) must be updated with your environment specific resources. After updating the configuration, the app can be deplyed with
+
+```bash
+chalice deploy
+```

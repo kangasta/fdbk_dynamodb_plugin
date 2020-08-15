@@ -1,0 +1,15 @@
+{
+  "version": "2.0",
+  "app_name": "fdbk-lambda",
+  "stages": {
+    "dev": {
+      "api_gateway_stage": "api",
+      "environment_variables": {
+        "USER_POOL_ARN": "USER_POOL_ARN_VALUE",
+        "CLIENT_URL": "CLIENT_URL_VALUE"
+      },
+      "iam_role_arn": "IAM_ROLE_ARN_VALUE",
+      "manage_iam_role": false
+    }
+  }
+}
