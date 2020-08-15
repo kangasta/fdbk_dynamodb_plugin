@@ -53,9 +53,25 @@ Resources:
           Action:
           - dynamodb:DescribeTable
           - dynamodb:GetItem
+          - dynamodb:Query
           - dynamodb:Scan
           Resource:
           - !GetAtt TopicsTable.Arn
+  DataGetPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      ManagedPolicyName: FdbkDataGet
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          Effect: Allow
+          Action:
+          - dynamodb:DescribeTable
+          - dynamodb:GetItem
+          - dynamodb:Query
+          - dynamodb:Scan
+          Resource:
+          - !GetAtt DataTable.Arn
   DataPutPolicy:
     Type: AWS::IAM::ManagedPolicy
     Properties:
@@ -77,3 +93,28 @@ Resources:
       ManagedPolicyArns:
       - !Ref TopicsGetPolicy
       - !Ref DataPutPolicy
+  ReaderRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: FdbkReaderLambda
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          Effect: Allow
+          Principal:
+            Service: lambda.amazonaws.com
+          Action: sts:AssumeRole
+      ManagedPolicyArns:
+      - !Ref TopicsGetPolicy
+      - !Ref DataGetPolicy
+      Policies:
+      - PolicyName: LambdaLogging
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            Effect: Allow
+            Action:
+            - logs:CreateLogGroup
+            - logs:CreateLogStream
+            - logs:PutLogEvents
+            Resource: arn:*:logs:*:*:*
