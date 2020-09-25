@@ -1,2 +1,2 @@
-fdbk>=3.0.1
-fdbk-dynamodb-plugin>=3.0.2
+fdbk~=3.1
+fdbk-dynamodb-plugin~=3.0
